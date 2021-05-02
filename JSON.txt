@@ -1,0 +1,133 @@
+[IP]
+• 外 59.124.226.9:6592
+• 內 192.168.101.234:50100
+
+[JSON]
+• 數值(Value)：short, int, long, float, double...
+• 字串(String)：“ ”
+• 布林值(Bool)：true/false
+• 陣列(Array)：[ , ]
+• 物件(Object)：{Key: Value}
+
+[AGV API]
+• INPUT
+{
+  "Name": "AGV名稱",
+  "Cmd": "命令代碼",
+  "Param": [參數1, ...]
+}
+• OUTPUT
+{
+  "StatusCode": 結果碼,
+  "Config": {狀態內容}
+}
+
+• AGV名稱
+ITRI_3-1 教室內
+ITRI_3-2 教室外
+ITRI_3-3 教室內
+
+• 指令碼
+500     取得AGV狀態資料
+30100 Servo ON(鎖定馬達模式)
+30101 Servo OFF(馬達解鎖模式)
+30108 右轉90度
+30109 右轉180度
+30110 左轉90度
+30111 左轉180度
+30208 右轉90度(轉盤不動)
+30209 右轉180度(轉盤不動)
+30210 左轉90度(轉盤不動)
+30211 左轉180度(轉盤不動)
+
+30214 轉盤右轉90度
+30215 轉盤右轉180度
+30216 轉盤左轉90度
+30217 轉盤左轉180度
+30218 轉盤上升(含自動對位)
+30219 轉盤下降(含自動對位)
+30310 緊急停止
+30312 腳本暫停
+30313 腳本繼續
+30314 腳本停止
+
+30112 邊走邊修(直走) 1000~50000 mm
+30230 前進充電站 300~1000 mm
+30231 離開充電站 300~1000 mm
+30121 執行腳本 請參考後續表格
+
+50 右轉90度
+60 右轉180度
+70 左轉90度
+80 左轉180度
+150 右轉90度(轉盤不動)
+160 右轉180度(轉盤不動)
+170 左轉90度(轉盤不動)
+180 左轉180度(轉盤不動)
+300 腳本暫停
+330 轉盤上升(含自動對位)
+340 轉盤下降(含自動對位)
+
+350 轉盤右轉90度
+360 轉盤右轉180度
+370 轉盤左轉90度
+380 轉盤左轉180度
+500+A 等待 A 秒；0<A<100
+6000+B 前進 B(mm) 抵達充電站；0<B<1000
+7000+C 前進 C(mm) 離開充電站；0<C<1000
+10000+D*100 直行 D 公尺；0<D<50
+
+• 結果碼
+0            正常。
+900        錯誤代碼；AGV忙碌中。
+902        錯誤代碼；AGV名稱不存在。
+905-908 錯誤代碼；AGV連線異常。
+909        錯誤代碼；無效參數。
+910        錯誤代碼；JSON格式錯誤。
+911        錯誤代碼；AGV命令代碼錯誤。
+912        錯誤代碼；AGV參數錯誤。
+921        錯誤代碼；Web Service異常。
+
+
+
+{"StatusCode":0,
+"Config":
+{"Pos":{"X":0.0,"Y":0.0,"A":0.0},
+"RunPara":{"Speed":0.0,"Acceleration":0.0,"Deceleration":0.0,"Jerk":0.0},
+"Attitude":{"X":0.0,"Y":0.0,"Yaw":0.0,"Code":"NULL"},
+"Shelves":{"X":0.0,"Y":0.0,"Yaw":0.0,"Code":"NULL"},
+"Status":{"State":"null",
+"IsJogSearch":false,
+"IsLiftUp":false,
+"IsMoving":false,
+"IsAxisReady":false,
+"IsTurnAxisReady":false,
+"IsLiftAxisReady":false,
+"IsAxisMoving":false,
+"IsTurnAxisMoving":false,
+"IsScriptCmd":false,
+"IsLiftAxisMoving":false,
+"IsAxisCoupling":false,
+"IsTurnAxisCoupling":false,
+"IsAxis3Coupling":false,
+"IsServoON":true,
+"IsReady":false,
+"IsError":false,
+"IsLaserStop":false,
+"IsChargeing":false,
+"IsLaserEnable":false,
+"IsEmergencyStop":false,
+"IsVirAxisReady":false,
+"IsLeftAxisReady":false,
+"IsRightAxisReady":false,
+"IsLeftMotorGearIN":false,
+"IsRightMotorGearIN":false,
+"IsScriptStart":false,
+"IsScriptFinish":false,
+"IsScriptPause":false,
+"IsScriptStop":false,
+"IsUpdatePos":false},
+"Battery":"Disconnect",
+"AgvLogIndex":{"IsProgress":false,"ScriptIdx":0,"RunIdx":0,"ErrorIdx":0},
+"AgvScript":[{"Type":330,"Parameter":0,"Code":330},{"Type":7000,"Parameter":550,"Code":7550},{"Type":6000,"Parameter":600,"Code":6600},{"Type":10000,"Parameter":10,"Code":11000},{"Type":500,"Parameter":10,"Code":510}]
+}}
